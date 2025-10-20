@@ -1,19 +1,15 @@
 // --- キーワードリスト（自由に追加可能） ---
 const keywordsList = [
-    { key: "luxury", name: "高級感" },
     { key: "simple", name: "シンプル" },
-    { key: "minimal", name: "ミニマル" },
     { key: "natural", name: "ナチュラル" },
     { key: "modern", name: "モダン" },
     { key: "clean", name: "クリーン" },
-    { key: "eco", name: "サステナブル" },
-    { key: "cute", name: "かわいい" },
     { key: "youthful", name: "若々しい" },
     { key: "feminine", name: "フェミニン" },
-    { key: "genderless", name: "ジェンダーレス" },
     { key: "botanical", name: "ボタニカル" },
     { key: "relaxing", name: "リラックス" },
     { key: "unique", name: "ユニーク" },
+    { key: "luxury", name: "高級感" },
     { key: "elegant", name: "エレガント" },
     { key: "pop", name: "ポップ" },
     { key: "japanese", name: "和風" },
@@ -23,20 +19,16 @@ const keywordsList = [
 ];
 // キーワードごとのプロンプト例
 const keywordPrompts = {
-    luxury: "high-end luxury, premium feel, sophisticated design",
     simple: "clean simple aesthetic, intuitive layout, effortless and accessible design, clear and easy to understand",
-    minimal: "stark minimalism, refined essential elements, monochromatic, rigorous geometric forms, severe aesthetic",
-    natural: "natural organic ingredients concept, earthy minimalist tones, serene atmosphere, unrefined texture, product resting on stone or clay",
+    natural: "natural organic ingredients concept, subtle hand-rendered graphic texture, muted earthy tones, serene atmosphere",
     modern: "sleek modern design, cutting-edge typography, contemporary forms",
-    clean: "pure clean look, pristine white space, transparent elements",
-    eco: "sustainable eco-friendly packaging, recycled material texture, conscious design",
-    cute: "adorable cute design, playful typography, soft focus, charming details",
-    feminine: "delicate feminine beauty, graceful curves, soft lighting, elegant details",
-    youthful: "vibrant and youthful energy, fresh and lively colors, dewy texture",
-    genderless: "neutral aesthetic, gender-fluid design, concrete texture, sharp and clear",
+    clean: "pristine clean aesthetic, delicate graphic, clear and crisp visual elements",
+    feminine: "delicate feminine beauty, gentle and sophisticated forms, elegant and refined details, ethereal and delicate mood, smooth matte texture",
+    youthful: "vibrant and youthful energy, fresh and lively colors",
     botanical: "lush botanical graphic elements, rich greenery, detailed plant motif illustration, vibrant natural light, active floral and leaf composition",
     relaxing: "calm and relaxing mood, spa-like atmosphere, serene, gentle light diffusion",
     unique: "distinct unique concept, unconventional form, artistic composition",
+    luxury: "high-end luxury, premium feel, sophisticated design",
     elegant: "classic elegant style, refined and graceful, soft shadows",
     pop: "bold pop art style, high contrast, vibrant graphic elements",
     japanese: "Wabi-Sabi aesthetic, delicate Japanese craftsmanship, subtle paper texture",
@@ -55,8 +47,8 @@ const packageTypes = {
 
 // --- 色調キーワード（カラー選択からキーワード選択へ変更） ---
 const toneOptions = [
-    { key: "tone-pale", name: "ペールトーン", gradientColors: ['#FADADD', '#FFFACD', '#C8F9E4', '#E5E3F5'], prompt: "pale tone, soft pastel colors, delicate and soft" },
-    { key: "tone-pastel", name: "パステルカラー", gradientColors:  ['#FFC0CB', '#FAFAD2', '#98FB98', '#B19CD9'], prompt: "pastel color palette, light and airy, cute and cheerful, highly visible tints" },  
+    { key: "tone-pale", name: "ペールトーン", gradientColors: ['#FADADD', '#FFFACD', '#C8F9E4', '#E5E3F5'], prompt: "pale tone, high lightness and low saturation color palette, delicate and soft, ethereal and transparent tints" },
+    { key: "tone-pastel", name: "パステルカラー", gradientColors:  ['#FFC0CB', '#FAFAD2', '#98FB98', '#B19CD9'], prompt: "pastel color palette, medium lightness and saturation, cute and cheerful, highly visible tints, bright and gentle atmosphere" },  
     { key: "tone-vivid", name: "ビビッド", gradientColors: ['#FF00FF', '#FFFF00', '#00FFFF', '#FF0000'], prompt: "vivid saturated colors, bright and energetic" },
     { key: "tone-nuance", name: "ニュアンスカラー", gradientColors: ['#A9A9A9', '#B0C4DE', '#B5878F'], prompt: "nuanced desaturated colors, subtle and sophisticated" },
     { key: "tone-dark", name: "ダークトーン", gradientColors:['#653030', '#4B5320', '#191970', '#000000'], prompt: "dark tone, deep rich colors, moody" },
@@ -318,7 +310,7 @@ function generatePrompt() {
         prompt += packageTypes[selectedPackageType].basePrompt + ", ";
     }
 
-    prompt += "brand logo text 'Sample' clearly visible on the package, clean white background, professional lighting, high quality, product photography style, 4K resolution, commercial grade mockup,";
+    prompt += "brand logo text 'Sample' clearly visible on the package, soft diffused lighting, high quality, product photography style, 4K resolution, commercial grade mockup, clean white background";
     return prompt;
 }
 
