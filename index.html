@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White Mockup for Package</title>
+    <title>CONCEPT PALETTE for Cosmetic Package</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -25,8 +25,8 @@
                         <div class="flex items-center space-x-3">
                             <i data-lucide="package" class="w-8 h-8"></i>
                             <div>
-                                <h1 class="text-2xl font-bold">White Mockup libraly</h1>
-                                <p class="text-base opacity-80">for Package</p>
+                                <h1 class="text-2xl font-bold">CONCEPT PALETTE</h1>
+                                <p class="text-base opacity-80">for Cosmetic Package</p>
                             </div>
                         </div>
                         <!-- ヘルプボタンを右端に -->
@@ -38,32 +38,34 @@
                 <div class="p-6 space-y-6">
                     <div class="p-6 flex flex-col md:flex-row gap-8">
                         <!-- 左カラム -->
-                        <div class="md:w-7/12 space-y-6 min-w-0">
-                            <!-- ステップ1: パッケージタイプ選択 -->
+                       <div class="md:w-7/12 space-y-6 min-w-0">
+                            <!-- ステップ1: キーワード選択 -->
                             <div class="space-y-4">
                                 <div class="flex items-center space-x-2">
                                     <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</div>
-                                    <h2 class="text-lg font-semibold text-gray-800">パッケージの種類を選択</h2>
+                                    <h2 class="text-lg font-semibold text-gray-800">キーワードを選択</h2>
                                 </div>
-                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="package-types"></div>
+                                <div id="keywords-container" class="min-w-full"></div>
                             </div>
-                            <!-- ステップ2: 詳細設定 -->
+                            <!-- ステップ2: 色調選択 -->
                             <div class="space-y-4">
                                 <div class="flex items-center space-x-2">
                                     <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</div>
-                                    <h2 class="text-lg font-semibold text-gray-800">詳細設定</h2>
+                                    <h2 class="text-lg font-semibold text-gray-800">色調を選択</h2>
                                 </div>
-                                <div id="package-details" class="min-w-full">
-                                    <div class="text-gray-500 text-center py-8">パッケージの種類を選択してください</div>
+                                <div id="color-tones"></div>
+                                <div class="mt-2 flex items-center gap-2">
+                                    <label for="custom-color-tone" class="text-gray-700">その他（色名等を入力）:</label>
+                                    <input type="text" id="custom-color-tone" class="border rounded px-2 py-1 w-40" placeholder="例: シャンパンゴールド">
                                 </div>
                             </div>
-                            <!-- ステップ3: アングル設定 -->
+                            <!-- ステップ3: パッケージ種類（任意） -->
                             <div class="space-y-4">
                                 <div class="flex items-center space-x-2">
                                     <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">3</div>
-                                    <h2 class="text-lg font-semibold text-gray-800">画像アングルを選択</h2>
+                                    <h2 class="text-lg font-semibold text-gray-800">パッケージの種類（任意）</h2>
                                 </div>
-                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="angles"></div>
+                                <div id="package-types"></div>
                             </div>
                         </div>
                         <!-- 右カラム -->
@@ -121,8 +123,8 @@
             <h2 class="text-xl font-bold mb-4">使い方ガイド</h2>
             <ol class="list-decimal pl-5 space-y-2 text-gray-700">
                 <li>パッケージの種類を選択してください。</li>
-                <li>詳細設定を必要に応じて選択してください。</li>
-                <li>画像アングルを選択してください。</li>
+                <li>キーワードを選択してください。</li>
+                <li>色調を選択してください。</li>
                 <li>選択内容に関連した画像が表示されます。サムネイルをクリックすると拡大表示されます。</li>
                 <li>「プロンプトを表示」ボタンでAI画像生成用のプロンプトが表示されます。</li>
                 <li>「コピー」ボタンでプロンプトをクリップボードにコピーできます。</li>
