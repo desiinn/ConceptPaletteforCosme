@@ -8,8 +8,8 @@ const keywordsList = [
     { key: "clean", name: "クリーン" },
     { key: "eco", name: "サステナブル" },
     { key: "cute", name: "かわいい" },
-    { key: "feminine", name: "フェミニン" },
     { key: "youthful", name: "若々しい" },
+    { key: "feminine", name: "フェミニン" },
     { key: "genderless", name: "ジェンダーレス" },
     { key: "botanical", name: "ボタニカル" },
     { key: "relaxing", name: "リラックス" },
@@ -23,34 +23,34 @@ const keywordsList = [
 ];
 // キーワードごとのプロンプト例
 const keywordPrompts = {
-    luxury: "luxury feel, premium design",
-    simple: "minimalist, clean design",
-    natural: "natural look, botanical elements",
-    // 必要に応じて追加
+    luxury: "high-end luxury, premium feel, sophisticated design",
+    simple: "clean simple aesthetic, intuitive layout, effortless and accessible design, clear and easy to understand",
+    minimal: "stark minimalism, refined essential elements, monochromatic, rigorous geometric forms, severe aesthetic",
+    natural: "natural organic ingredients concept, earthy minimalist tones, serene atmosphere, unrefined texture, product resting on stone or clay",
+    modern: "sleek modern design, cutting-edge typography, contemporary forms",
+    clean: "pure clean look, pristine white space, transparent elements",
+    eco: "sustainable eco-friendly packaging, recycled material texture, conscious design",
+    cute: "adorable cute design, playful typography, soft focus, charming details",
+    feminine: "delicate feminine beauty, graceful curves, soft lighting, elegant details",
+    youthful: "vibrant and youthful energy, fresh and lively colors, dewy texture",
+    genderless: "neutral aesthetic, gender-fluid design, concrete texture, sharp and clear",
+    botanical: "lush botanical graphic elements, rich greenery, detailed plant motif illustration, vibrant natural light, active floral and leaf composition",
+    relaxing: "calm and relaxing mood, spa-like atmosphere, serene, gentle light diffusion",
+    unique: "distinct unique concept, unconventional form, artistic composition",
+    elegant: "classic elegant style, refined and graceful, soft shadows",
+    pop: "bold pop art style, high contrast, vibrant graphic elements",
+    japanese: "Wabi-Sabi aesthetic, delicate Japanese craftsmanship, subtle paper texture",
+    ethnic: "rich ethnic patterns, warm earthy tones, handcrafted texture",
+    futuristic: "sci-fi futuristic concept, metallic sheen, dynamic composition, glossy finish",
 };
 
 // パッケージタイプ
 const packageTypes = {
-    box: {
-        name: "箱",
-        basePrompt: "white paper box packaging mockup, seamless edges"
-    },
-    bottle: {
-        name: "ボトル",
-        basePrompt: "bottle packaging mockup"
-    },
-    tube: {
-        name: "チューブ",
-        basePrompt: "tube packaging mockup"
-    },
-    jar: {
-        name: "クリームジャー",
-        basePrompt: "cosmetic glass jar packaging mockup, cream container" // クリームやガラス容器であることを指定
-    },
-    pouch: {
-        name: "パウチ", 
-        basePrompt: "foil pouch packaging mockup, sachet, single-use packet" // フォイルや使い切り小袋であることを指定
-    },
+    box: {name: "箱", basePrompt: "white paper box packaging mockup, seamless edges"},
+    bottle: {name: "ボトル", basePrompt: "bottle packaging mockup"},
+    tube: {name: "チューブ", basePrompt: "tube packaging mockup"},
+    jar: {name: "クリームジャー", basePrompt: "cosmetic glass jar packaging mockup, cream container"},
+    pouch: {name: "パウチ", basePrompt: "foil pouch packaging mockup, sachet, single-use packet"},
 };
 
 // --- 色調キーワード（カラー選択からキーワード選択へ変更） ---
@@ -63,7 +63,6 @@ const toneOptions = [
     { key: "tone-monotone", name: "モノトーン", gradientColors: ['#000000', '#808080', '#D3D3D3', '#FFFFFF'], prompt: "monotone palette, grayscale accents, minimal contrast" },
     { key: "tone-warm", name: "ウォーム", gradientColors: ['#FFB347', '#FF7F50', '#FF4500'], prompt: "warm tone, cozy and inviting colors, comforting and friendly" },
     { key: "tone-cool", name: "クール", gradientColors: ['#87CEEB', '#4682B4', '#5F9EA0'], prompt: "cool tone, refreshing and calm colors, modern and sleek" },
-    { key: "tone-neon", name: "ネオンカラー", gradientColors: ['#39FF14', '#FF6EC7', '#1B03A3'], prompt: "neon colors, bright and eye-catching hues, energetic and modern" }, 
     // ...追加可能
 ];
 
@@ -84,7 +83,7 @@ const availableImages = pictImages.map(filename => {
 
 // --- 状態変数 ---
 let selectedKeywords = [];
-let selectedColorTones = []; 
+let selectedColorTone = "";
 let selectedPackageType = "";
 
 // --- DOM要素 ---
@@ -157,13 +156,14 @@ function renderKeywords() {
 // --- 色調（キーワード）ボタン生成 ---
 function renderColorTones() {
     colorContainer.innerHTML = "";
+
     const row = document.createElement("div");
     row.className = "flex flex-wrap gap-3 items-center";
 
     toneOptions.forEach(tone => {
-        const isSelected = selectedColorTones.includes(tone.key);
+        const isSelected = selectedColorTone === tone.key;
         const button = document.createElement("button");
-        
+
         button.className = `tone-btn p-3 rounded-lg border-2 transition-all duration-200 flex flex-col items-center gap-2 w-32 ${
             isSelected ? "border-blue-500 bg-blue-50 text-blue-700" : "border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50"
         }`;
@@ -171,27 +171,22 @@ function renderColorTones() {
 
         // グラデーションアイコン要素を作成
         const gradientIcon = document.createElement("div");
-        gradientIcon.className = "w-full h-10 rounded"; 
-         if (tone.gradientColors && tone.gradientColors.length >= 2) {
-            const colors = tone.gradientColors.join(', '); // 配列の色を ', ' で結合
+        gradientIcon.className = "w-full h-10 rounded";
+        if (tone.gradientColors && tone.gradientColors.length >= 2) {
+            const colors = tone.gradientColors.join(', ');
             gradientIcon.style.background = `linear-gradient(to right, ${colors})`;
         }
 
         // ボタンのテキスト要素を作成
         const textSpan = document.createElement("span");
-        // 【修正箇所 2】: ラベルを下部に配置するよう、アイコンの後に追加のクラスは不要
         textSpan.textContent = tone.name;
 
-        // 要素を組み立て (グラデーションアイコンが上、ラベルが下に配置される)
+        // 要素を組み立て
         button.appendChild(gradientIcon);
-        button.appendChild(textSpan); 
+        button.appendChild(textSpan);
 
         button.onclick = () => {
-            if (isSelected) {
-                selectedColorTones = selectedColorTones.filter(k => k !== tone.key);
-            } else {
-                selectedColorTones.push(tone.key);
-            }
+            selectedColorTone = isSelected ? "" : tone.key; // 単一選択に変更
             updateUI();
         };
         row.appendChild(button);
@@ -240,10 +235,10 @@ function renderPackageTypes() {
 // --- 画像フィルタ（AND条件：キーワード・色調・パッケージ種類） ---
 function updateFilteredImages() {
     dynamicImageGrid.innerHTML = "";
-    // フィルター条件
+    // フィルター条件（selectedColorTone を単一値として扱う）
     const filters = [
         ...selectedKeywords,
-        ...selectedColorTones,
+        selectedColorTone,
         selectedPackageType
     ].filter(Boolean);
 
@@ -294,7 +289,7 @@ function closeImageModal() {
 
 // --- プロンプト生成 ---
 function generatePrompt() {
-    let prompt = "Create a cosmetic package concept, ";
+    let prompt = "Create a cosmetic package graphic concept, ";
 
     // キーワード
     if (selectedKeywords.length > 0) {
@@ -304,14 +299,11 @@ function generatePrompt() {
         }
     }
 
-    // 色調（キーワード選択）
-    if (selectedColorTones.length > 0) {
-        const tonePrompts = selectedColorTones.map(k => {
-            const found = toneOptions.find(opt => opt.key === k);
-            return found ? found.prompt : "";
-        }).filter(Boolean);
-        if (tonePrompts.length > 0) {
-            prompt += tonePrompts.join(", ") + ", ";
+    // 色調（単一選択）
+    if (selectedColorTone) {
+        const found = toneOptions.find(opt => opt.key === selectedColorTone);
+        if (found && found.prompt) {
+            prompt += found.prompt + ", ";
         }
     }
 
@@ -326,7 +318,7 @@ function generatePrompt() {
         prompt += packageTypes[selectedPackageType].basePrompt + ", ";
     }
 
-    prompt += "clean white background, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text,";
+    prompt += "brand logo text 'Sample' clearly visible on the package, clean white background, professional lighting, high quality, product photography style, 4K resolution, commercial grade mockup,";
     return prompt;
 }
 
@@ -359,12 +351,9 @@ function showPrompt() {
         });
         summaryHTML += `<div><strong>キーワード:</strong> ${keywordTexts.join(", ")}</div>`;
     }
-    if (selectedColorTones.length > 0) {
-        const colorNames = selectedColorTones.map(k => {
-            const found = toneOptions.find(opt => opt.key === k);
-            return found ? found.name : "";
-        }).filter(Boolean);
-        summaryHTML += `<div><strong>色調:</strong> ${colorNames.join(", ")}</div>`;
+    if (selectedColorTone) {
+        const found = toneOptions.find(opt => opt.key === selectedColorTone);
+        if (found) summaryHTML += `<div><strong>色調:</strong> ${found.name}</div>`;
     }
     if (selectedPackageType) {
         summaryHTML += `<div><strong>パッケージ種類:</strong> ${packageTypes[selectedPackageType].name}</div>`;
@@ -407,7 +396,7 @@ function showCopyMessage(message) {
 // --- リセット ---
 function reset() {
     selectedKeywords = [];
-    selectedColorTones = [];
+    selectedColorTone = ""; // 単一選択をリセット
     selectedPackageType = "";
     promptDisplay.classList.add("hidden");
     copyMessage.classList.add("hidden");

@@ -2,6 +2,12 @@
 body {
   overflow-y: scroll;
 }
+/* ヘッダータイトルに Shippori Mincho を適用 */
+.header-title {
+    font-family: "Shippori Mincho", serif;
+    /* 必要ならサイズや行間を微調整 */
+    letter-spacing: 0.02em;
+}
 /* ボタンホバーエフェクトの微調整 */
 .package-btn:hover {
     transform: translateY(-1px);

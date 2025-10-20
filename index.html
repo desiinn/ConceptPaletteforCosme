@@ -6,6 +6,7 @@
     <title>CONCEPT PALETTE for Cosmetic Package</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,15 +21,15 @@
         <div class="max-w-7xl mx-auto">
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                 <!-- ヘッダー -->
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
+                <div class="bg-gradient-to-r from-teal-100 to-cyan-300 text-gray-800 p-6">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <i data-lucide="package" class="w-8 h-8"></i>
-                            <div>
-                                <h1 class="text-2xl font-bold">CONCEPT PALETTE</h1>
-                                <p class="text-base opacity-80">for Cosmetic Package</p>
+                         <div class="flex items-center space-x-3">
+                                <i data-lucide="PALETTE" class="w-8 h-8"></i>
+                                <div>
+                                 <h1 class="text-2xl font-bold header-title">CONCEPT PALETTE</h1>
+                                 <p class="text-base opacity-80">for Cosmetic Package</p>
+                                </div>
                             </div>
-                        </div>
                         <!-- ヘルプボタンを右端に -->
                         <button id="help-btn" class="ml-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-40 transition" title="使い方">
                             <i data-lucide="help-circle" class="w-7 h-7 text-white"></i>
@@ -43,7 +44,7 @@
                             <div class="space-y-4">
                                 <div class="flex items-center space-x-2">
                                     <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</div>
-                                    <h2 class="text-lg font-semibold text-gray-800">キーワードを選択</h2>
+                                    <h2 class="text-lg font-semibold text-gray-800">キーワードを選択（必須）</h2>
                                 </div>
                                 <div id="keywords-container" class="min-w-full"></div>
                             </div>
@@ -51,7 +52,7 @@
                             <div class="space-y-4">
                                 <div class="flex items-center space-x-2">
                                     <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</div>
-                                    <h2 class="text-lg font-semibold text-gray-800">色調を選択</h2>
+                                    <h2 class="text-lg font-semibold text-gray-800">色調を選択（任意）</h2>
                                 </div>
                                 <div id="color-tones"></div>
                                 <div class="mt-2 flex items-center gap-2">
@@ -122,9 +123,9 @@
             <button id="help-modal-close" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl" aria-label="閉じる">&times;</button>
             <h2 class="text-xl font-bold mb-4">使い方ガイド</h2>
             <ol class="list-decimal pl-5 space-y-2 text-gray-700">
-                <li>パッケージの種類を選択してください。</li>
-                <li>キーワードを選択してください。</li>
-                <li>色調を選択してください。</li>
+                <li>イメージに近いキーワードを選択してください。</li>
+                <li>色調を選択してください。（任意）</li>
+                <li>パッケージの種類を選択してください。（任意）</li>
                 <li>選択内容に関連した画像が表示されます。サムネイルをクリックすると拡大表示されます。</li>
                 <li>「プロンプトを表示」ボタンでAI画像生成用のプロンプトが表示されます。</li>
                 <li>「コピー」ボタンでプロンプトをクリップボードにコピーできます。</li>
