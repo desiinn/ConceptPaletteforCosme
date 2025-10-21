@@ -1,3 +1,4 @@
+const REPO_NAME = "ConceptPaletteforCosme";
 // --- キーワードリスト（自由に追加可能） ---
 const keywordsList = [
     { key: "luxury", name: "高級感" },
@@ -272,7 +273,8 @@ const pictImages = [
 const availableImages = pictImages.map(filename => {
     const tags = filename.replace(/\.[^/.]+$/, "").split("_");
     return {
-        src: `./images/${filename}`,
+        // 修正後のパス: /リポジトリ名/images/ファイル名
+        src: `/${REPO_NAME}/images/${filename}`,
         tags: tags
     };
 });
