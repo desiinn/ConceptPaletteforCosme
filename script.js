@@ -270,9 +270,9 @@ const pictImages = [
 
 // 画像データ
 const availableImages = pictImages.map(filename => {
-    const tags = filename.replace(/\.[^/.]+$/, "").split("-");
+    const tags = filename.replace(/\.[^/.]+$/, "").split("_");
     return {
-        src: "images/pict/" + filename,
+        src: `./images/${filename}`,
         tags: tags
     };
 });
