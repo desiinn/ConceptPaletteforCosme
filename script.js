@@ -274,7 +274,7 @@ const availableImages = pictImages.map(filename => {
     const tags = filename.replace(/\.[^/.]+$/, "").split("_");
     return {
         // 修正後のパス: /リポジトリ名/images/ファイル名
-        src: `/${REPO_NAME}/images/${filename}`,
+        src: `/${REPO_NAME}/images/pict/${filename}`,
         tags: tags
     };
 });
