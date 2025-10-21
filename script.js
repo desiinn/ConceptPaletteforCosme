@@ -28,9 +28,9 @@ const keywordPrompts = {
     botanical: "lush botanical graphic elements, rich greenery, detailed plant motif illustration, vibrant natural light, active floral and leaf composition",
     unique: "distinct unique concept, unconventional form, artistic composition",
     pop: "bold pop art style, high contrast, vibrant graphic elements",
-    japanese: "Wabi-Sabi aesthetic, delicate Japanese craftsmanship, subtle paper texture",
-    ethnic: "rich ethnic patterns, warm earthy tones, handcrafted texture",
-    futuristic: "sci-fi futuristic concept, metallic sheen, dynamic composition, glossy finish",
+    japanese: " Japanese-inspired graphic, elegant simplicity, delicate brushwork, tranquil atmosphere, intricate yet subtle design",
+    ethnic: "Ethnic-inspired design, intricate tribal motifs, rich cultural patterns, handcrafted textures, earthy and organic feel, traditional ornamentation",
+    futuristic: "Futuristic design, sleek and sophisticated, minimalist yet luxurious, dynamic composition, innovative design concept",
 };
 
 // パッケージタイプ
