@@ -273,8 +273,8 @@ const pictImages = [
 const availableImages = pictImages.map(filename => {
     const tags = filename.replace(/\.[^/.]+$/, "").split("_");
     return {
-        // 修正後のパス: /リポジトリ名/images/ファイル名
-        src: `/${REPO_NAME}/images/pict/${filename}`,
+        // 修正後のパス: images/pict/ファイル名
+        src: `images/pict/${filename}`, // 👈 リポジトリ名（REPO_NAME）を外す
         tags: tags
     };
 });
